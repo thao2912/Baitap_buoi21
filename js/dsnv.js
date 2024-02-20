@@ -4,34 +4,40 @@ function DSNV() {
         this.arr.push(nv);
     };
 
-    this.capNhat = function (nv) { 
-        const index = layIndexTheoId(nv);
+    this.capNhat = function (nv) {
+        const index = this.layIndexTheoId(nv);
 
-        if(index !== -1) {
+        if (index !== -1) {
             this.arr[index] = nv;
         }
     };
+
+    this.xoa = function(id) {
+        const index = this.layIndexTheoId(id);
+        if(index !== -1) {
+            this.arr.splice(index, 1);
+        }
+    }
 
     this.timTheoXepLoai = function (loai) { };
 
     this.layIndexTheoId = function (id) {
         let index = -1;
-        this.arr.forEach(element => {
-            index ++;
-            if(element.taiKhoan === id) {
-                return index;
+        for (let i = 0; i < this.arr.length; i++) {
+            if (this.arr[i].taiKhoan === id) {
+                index = i;
+                break;
             }
-        });
+        }
+        return index;
+    };
 
-        return -1;
-     };
-
-    this.layThongTinTheoId = function (id) { 
-        const index = layIndexTheoId(nv);
-        if(index === 1) {
+    this.layThongTinTheoId = function (id) {
+        const index = this.layIndexTheoId(id);
+        if (index !== -1) {
             return this.arr[index];
         }
-        
+
         return null;
     };
 }
